@@ -1,4 +1,4 @@
-package = "spawn-sdk"
+package = "spawn-lua-sdk"
 version = "0.1.0"
 source = {
     url = "git://github.com/eigr-labs/spawn-lua-sdk"
