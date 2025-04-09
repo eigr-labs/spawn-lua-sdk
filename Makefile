@@ -27,26 +27,21 @@ clean:
 
 deps:
 	echo "Installing dependencies..."
-	sudo luarocks install lua-protobuf
-	sudo luarocks install luasocket
-	sudo luarocks install lua-cjson
+	luarocks install --local lua-protobuf
+	luarocks install --local luasocket
+	luarocks install --local lua-cjson
 
 install: build
 	echo "Installing the project..."
-	luarocks make --local spawn-sdk-0.1.0.rockspec
+	luarocks make --local spawn-lua-sdk-0.1-0.rockspec
 
 test:
 	go test -v ./...
 
 compile-proto:
 	echo "Compiling protobuf files..."
-	protoc --lua_out=src/generated/ \
-        -I=${GOOGLE_PROTO_ROOT} \
-        ${GOOGLE_PROTO_FILES}
-
-	protoc --lua_out=src/generated/ \
-        -I=${SPAWN_PROTO_ROOT} \
-        ${SPAWN_PROTO_FILES}
+    docker run --rm -v $(pwd):/work -w /work znly/protoc --plugin=protoc-gen-lua=/usr/bin/protoc-gen-lua --lua_out=src/generated -I=${GOOGLE_PROTO_ROOT} ${GOOGLE_PROTO_FILES}
+    docker run --rm -v $(pwd):/work -w /work znly/protoc --plugin=protoc-gen-lua=/usr/bin/protoc-gen-lua --lua_out=src/generated -I=${SPAWN_PROTO_ROOT} ${SPAWN_PROTO_FILES}
 	
 
 

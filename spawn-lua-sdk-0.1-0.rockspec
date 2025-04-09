@@ -1,5 +1,5 @@
 package = "spawn-lua-sdk"
-version = "0.1.0"
+version = "0.1-0"
 source = {
     url = "git://github.com/eigr-labs/spawn-lua-sdk"
 }
@@ -9,7 +9,6 @@ description = {
     license = "Apache-2.0"
 }
 dependencies = {
-    "lua >= 5.3",
     "lua-protobuf >= 0.3.3",
     "luasocket >= 3.1.0",
     "lua-cjson >= 2.1.0"
